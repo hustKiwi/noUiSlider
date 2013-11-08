@@ -1,0 +1,513 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>45分钟学会CoffeeScript by hustKiwi</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>45分钟学会CoffeeScript</h1>
+        <p>Kiwi@2013.11.8</p>
+        <p class="view"><a href="https://github.com/hustKiwi/noUiSlider">View the Project on GitHub <small>hustKiwi/noUiSlider</small></a></p>
+        <ul>
+          <li><a href="https://github.com/hustKiwi/noUiSlider/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/hustKiwi/noUiSlider/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/hustKiwi/noUiSlider">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="45%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9A" class="anchor" href="#45%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9A"><span class="octicon octicon-link"></span></a>45分钟学会</h1>
+
+<pre><code>        {
+     }   }   {
+    {   {  }  }
+     }   }{  {
+    {  }{  }  }                    _____       __  __
+   { }{ }{  { }                   / ____|     / _|/ _|
+ .- { { }  { }} -.               | |     ___ | |_| |_ ___  ___
+(  { } { } { } }  )              | |    / _ \|  _|  _/ _ \/ _ \
+|`-..________ ..-'|              | |___| (_) | | | ||  __/  __/
+|                 |               \_____\___/|_| |_| \___|\___|
+|                 ;--.
+|                (__  \            _____           _       _
+|                 | )  )          / ____|         (_)     | |
+|                 |/  /          | (___   ___ _ __ _ _ __ | |_
+|                 (  /            \___ \ / __| '__| | '_ \| __|
+|                 |/              ____) | (__| |  | | |_) | |_
+|                 |              |_____/ \___|_|  |_| .__/ \__|
+ `-.._________..-'                                  | |
+                                                    |_|
+</code></pre>
+
+<h2>
+<a name="%E8%83%8C%E6%99%AF" class="anchor" href="#%E8%83%8C%E6%99%AF"><span class="octicon octicon-link"></span></a>背景</h2>
+
+<blockquote>
+<p>CoffeeScript is a little language that compiles into JavaScript.</p>
+</blockquote>
+
+<p><img src="http://www.geekpics.net/images/2013/11/07/2BF6P.png" alt="CoffeeScript, TypeScript, and Dart"></p>
+
+<blockquote>
+<p>The golden rule of CoffeeScript is: "<em>It's just JavaScript</em>".</p>
+</blockquote>
+
+<ul>
+<li><a href="http://www.zhihu.com/question/20833518">Dart、CoffeeScript、TypeScript和JavaScript哪种最适合专门学习</a></li>
+<li><a href="http://128bitstudios.com/2013/08/11/a-quick-look-at-coffeescript-typescript-and-dart/">A quick look at CoffeeScript, TypeScript, and Dart</a></li>
+</ul><blockquote>
+<p>CoffeeScript has been around for a bit now, made by Jeremy Ashkenas (Same person behind Backbone.js and Underscore.js) in 2009. The syntax looks like a mix of Ruby and Python and tends to draw people with a background in those languages. CoffeeScript keeps JavaScript’s best practices in mind but offers a better syntax usually with much less code.</p>
+</blockquote>
+
+<p><img src="http://farm5.staticflickr.com/4066/4704268314_bb0e9d0ff3_z.jpg" alt="JS: The Definitive Guide VS The Good Parts"></p>
+
+<h2>
+<a name="%E5%BC%95%E5%85%A5" class="anchor" href="#%E5%BC%95%E5%85%A5"><span class="octicon octicon-link"></span></a>引入</h2>
+
+<p>实现一个非法song ids过滤的function</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">format</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sids</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">$</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">sids</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">sids</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">sid</span> <span class="o">=</span> <span class="nx">sids</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">sid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">r</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">''</span> <span class="o">+</span> <span class="nx">sid</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">r</span><span class="p">;</span>
+  <span class="p">})()</span> <span class="o">||</span> <span class="s1">''</span> <span class="o">+</span> <span class="nx">sids</span><span class="p">;</span>    
+<span class="p">};</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">formatSid = </span><span class="nf">(sids) -&gt;</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">sids</span><span class="p">)</span> <span class="o">and</span> <span class="p">(</span><span class="s">''</span> <span class="o">+</span> <span class="nx">sid</span> <span class="k">for</span> <span class="nx">sid</span> <span class="k">in</span> <span class="nx">sids</span> <span class="k">when</span> <span class="nx">sid</span><span class="p">)</span> <span class="o">or</span> <span class="s">''</span> <span class="o">+</span> <span class="nx">sids</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">console</span> <span class="o">!==</span> <span class="s2">"undefined"</span> <span class="o">&amp;&amp;</span> <span class="nx">console</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span> <span class="o">===</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nx">console</span><span class="o">?</span><span class="p">.</span><span class="nx">debug</span><span class="o">?</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</pre></div>
+
+<h2>
+<a name="%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95" class="anchor" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="octicon octicon-link"></span></a>基础语法</h2>
+
+<h3>
+<a name="%E6%B3%A8%E9%87%8A" class="anchor" href="#%E6%B3%A8%E9%87%8A"><span class="octicon octicon-link"></span></a>注释</h3>
+
+<div class="highlight highlight-coffeescript"><pre><span class="c1"># 单行注释</span>
+<span class="cm">###</span>
+<span class="cm">多行注释或LICENCE</span>
+<span class="cm">###</span>
+</pre></div>
+
+<h3>
+<a name="%E5%8F%98%E9%87%8F%E5%8F%8A%E4%BD%9C%E7%94%A8%E5%9F%9F" class="anchor" href="#%E5%8F%98%E9%87%8F%E5%8F%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="octicon octicon-link"></span></a>变量及作用域</h3>
+
+<blockquote>
+<p>The CoffeeScript compiler takes care to make sure that all of your variables are properly declared within lexical scope — you never need to write  var yourself.</p>
+</blockquote>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">outer = </span><span class="mi">1</span>
+<span class="nv">changeNumbers = </span><span class="nf">-&gt;</span>
+  <span class="nv">inner = </span><span class="o">-</span><span class="mi">1</span>
+  <span class="nv">outer = </span><span class="mi">10</span>
+<span class="nv">inner = </span><span class="nx">changeNumbers</span><span class="p">()</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">changeNumbers</span><span class="p">,</span> <span class="nx">inner</span><span class="p">,</span> <span class="nx">outer</span><span class="p">;</span>
+
+<span class="nx">outer</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="nx">changeNumbers</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">inner</span><span class="p">;</span>
+  <span class="nx">inner</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">outer</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">inner</span> <span class="o">=</span> <span class="nx">changeNumbers</span><span class="p">();</span>
+</pre></div>
+
+<h3>
+<a name="%E5%87%BD%E6%95%B0" class="anchor" href="#%E5%87%BD%E6%95%B0"><span class="octicon octicon-link"></span></a>函数</h3>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">fill = </span><span class="nf">(container, liquid = "coffee") -&gt;</span>
+  <span class="s">"Filling the </span><span class="si">#{</span><span class="nx">container</span><span class="si">}</span><span class="s"> with </span><span class="si">#{</span><span class="nx">liquid</span><span class="si">}</span><span class="s">..."</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">fill</span><span class="p">;</span>
+
+<span class="nx">fill</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">liquid</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">liquid</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">liquid</span> <span class="o">=</span> <span class="s2">"coffee"</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="s2">"Filling the "</span> <span class="o">+</span> <span class="nx">container</span> <span class="o">+</span> <span class="s2">" with "</span> <span class="o">+</span> <span class="nx">liquid</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">trigger = </span><span class="nx">@trigger</span>
+
+<span class="vi">@trigger = </span><span class="nf">(events...) =&gt;</span>
+  <span class="k">if</span> <span class="nx">@_isEmptyMp3</span><span class="p">()</span>
+    <span class="nx">trigger</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">@</span><span class="p">,</span> <span class="nx">e</span> <span class="k">for</span> <span class="nx">e</span> <span class="k">in</span> <span class="nx">events</span> <span class="k">when</span> <span class="o">not</span> <span class="nx">e</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s">'player:'</span><span class="p">))</span>
+  <span class="k">else</span>
+    <span class="nx">trigger</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">@</span><span class="p">,</span> <span class="nx">events</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">trigger</span><span class="p">,</span>
+  <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+  <span class="nx">__slice</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span><span class="p">;</span>
+
+<span class="nx">trigger</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">trigger</span><span class="p">;</span>
+
+<span class="k">this</span><span class="p">.</span><span class="nx">trigger</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">e</span><span class="p">,</span> <span class="nx">events</span><span class="p">;</span>
+  <span class="nx">events</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">?</span> <span class="nx">__slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">:</span> <span class="p">[];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">_this</span><span class="p">.</span><span class="nx">_isEmptyMp3</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">trigger</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">_this</span><span class="p">,</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">_i</span><span class="p">,</span> <span class="nx">_len</span><span class="p">,</span> <span class="nx">_results</span><span class="p">;</span>
+      <span class="nx">_results</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="k">for</span> <span class="p">(</span><span class="nx">_i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">_len</span> <span class="o">=</span> <span class="nx">events</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">_i</span> <span class="o">&lt;</span> <span class="nx">_len</span><span class="p">;</span> <span class="nx">_i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">e</span> <span class="o">=</span> <span class="nx">events</span><span class="p">[</span><span class="nx">_i</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">e</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'player:'</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nx">_results</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">_results</span><span class="p">;</span>
+    <span class="p">})());</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">trigger</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">_this</span><span class="p">,</span> <span class="nx">events</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+<h3>
+<a name="%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%95%B0%E7%BB%84" class="anchor" href="#%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%95%B0%E7%BB%84"><span class="octicon octicon-link"></span></a>对象与数组</h3>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">object1 = </span><span class="p">{</span><span class="nv">one: </span><span class="mi">1</span><span class="p">,</span> <span class="nv">two: </span><span class="mi">2</span><span class="p">}</span>
+
+<span class="nv">object2 = one: </span><span class="mi">1</span><span class="p">,</span> <span class="nv">two: </span><span class="mi">2</span>
+
+<span class="nv">object3 =</span>
+  <span class="nv">one: </span><span class="mi">1</span>
+  <span class="nv">two: </span><span class="mi">2</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">bitlist = </span><span class="p">[</span>
+  <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nv">start = </span><span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">]</span>
+<span class="nv">middle = </span><span class="nx">numbers</span><span class="p">[</span><span class="mi">3</span><span class="p">...</span><span class="mi">6</span><span class="p">]</span>
+<span class="nv">end = </span><span class="nx">numbers</span><span class="p">[</span><span class="mi">6</span><span class="p">..]</span>
+<span class="nv">copy = </span><span class="nx">numbers</span><span class="p">[..]</span>
+
+<span class="nv">numbers = </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="nx">numbers</span><span class="p">[</span><span class="mi">3</span><span class="p">..</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">start</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="nx">middle</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+<span class="nx">end</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+<span class="nx">copy</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">numbers</span><span class="p">;</span>
+<span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">];</span>
+<span class="p">[].</span><span class="nx">splice</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">numbers</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="nx">concat</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">]));</span>
+</pre></div>
+
+<h3>
+<a name="%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6" class="anchor" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="octicon octicon-link"></span></a>流程控制</h3>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nx">alert</span> <span class="k">if</span> <span class="nx">score</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="k">then</span> <span class="s">'Pass'</span> <span class="k">else</span> <span class="s">'Fail'</span>
+
+<span class="nx">alert</span> <span class="s">"It's cold!"</span> <span class="k">if</span> <span class="nx">Temp</span> <span class="o">&lt;</span> <span class="mi">5</span>
+
+<span class="k">if</span> <span class="o">not</span> <span class="kc">true</span> <span class="k">then</span> <span class="s">'Panic'</span>
+<span class="k">unless</span> <span class="kc">true</span>
+  <span class="s">'Panic'</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">alert</span><span class="p">(</span><span class="nx">score</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="o">?</span> <span class="s1">'Pass'</span> <span class="o">:</span> <span class="s1">'Fail'</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">Temp</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s2">"It's cold!"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="s1">'Panic'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="s1">'Panic'</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">next: </span><span class="nf">-&gt;</span>
+  <span class="nv">list = </span><span class="nx">@list</span>
+  <span class="nv">i = </span><span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cur</span><span class="p">,</span> <span class="nx">list</span><span class="p">)</span>
+  <span class="nv">l = </span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span>
+  <span class="nv">next = </span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="nv">loopNext = </span><span class="nf">-&gt;</span>
+    <span class="nv">next = </span><span class="mi">0</span> <span class="k">if</span> <span class="nx">i</span> <span class="o">is</span> <span class="nx">l</span> <span class="o">-</span> <span class="mi">1</span>
+
+  <span class="k">switch</span> <span class="nx">@mode</span>
+    <span class="k">when</span> <span class="s">'single'</span> <span class="k">then</span> <span class="nv">next = </span><span class="nx">i</span>
+    <span class="k">when</span> <span class="s">'random'</span> <span class="k">then</span> <span class="nv">next = </span><span class="nx">utils</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">when</span> <span class="s">'loop'</span>
+      <span class="nx">loopNext</span><span class="p">()</span>
+    <span class="k">else</span>
+      <span class="nx">loopNext</span><span class="p">()</span>
+
+  <span class="vi">@cur = </span><span class="nx">list</span><span class="p">[</span><span class="nx">next</span><span class="p">]</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="k">switch</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">mode</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="s1">'single'</span><span class="o">:</span>
+    <span class="nx">next</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="s1">'random'</span><span class="o">:</span>
+    <span class="nx">next</span> <span class="o">=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="s1">'loop'</span><span class="o">:</span>
+    <span class="nx">loopNext</span><span class="p">();</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">default</span><span class="o">:</span>
+    <span class="nx">loopNext</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>惯例用法</p>
+
+<table>
+<tr>
+<td>CoffeeScript</td>
+   <td>Javascript*</td>
+ </tr>
+<tr>
+<td>is</td>
+   <td>===</td>
+ </tr>
+<tr>
+<td>isnt</td>
+   <td>!==</td>
+ </tr>
+<tr>
+<td>not</td>
+   <td>!</td>
+ </tr>
+<tr>
+<td>and</td>
+   <td>&amp;&amp;</td>
+ </tr>
+<tr>
+<td>or</td>
+   <td>||</td>
+ </tr>
+<tr>
+<td>true, yes, on</td>
+   <td>true</td>
+ </tr>
+<tr>
+<td>false, no, off</td>
+   <td>false</td>
+ </tr>
+<tr>
+<td>@, this</td>
+   <td>this</td>
+ </tr>
+<tr>
+<td>of(To use 'of' to test for JavaScript object-key presence)</td>
+   <td>in</td>
+ </tr>
+<tr>
+<td>in(To use 'in' to test for array presence)</td>
+   <td>no JS equivalent(likely indexOf)</td>
+ </tr>
+</table><h3>
+<a name="%E5%BE%AA%E7%8E%AF%E5%92%8C%E6%8E%A8%E5%AF%BC%E5%BC%8F" class="anchor" href="#%E5%BE%AA%E7%8E%AF%E5%92%8C%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="octicon octicon-link"></span></a>循环和推导式</h3>
+
+<div class="highlight highlight-coffeescript"><pre><span class="k">for</span> <span class="nx">num</span> <span class="k">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">..</span><span class="mi">1</span><span class="p">]</span>
+  <span class="nv">countdown = </span><span class="nx">num</span>
+
+<span class="nv">evens = </span><span class="p">(</span><span class="nx">x</span> <span class="k">for</span> <span class="nx">x</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="mi">10</span><span class="p">]</span> <span class="k">by</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nv">courses = </span><span class="p">[</span><span class="s">'greens'</span><span class="p">,</span> <span class="s">'caviar'</span><span class="p">,</span> <span class="s">'truffles'</span><span class="p">,</span> <span class="s">'roast'</span><span class="p">,</span> <span class="s">'cake'</span><span class="p">]</span>
+<span class="nx">menu</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">dish</span> <span class="k">for</span> <span class="nx">dish</span><span class="p">,</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">courses</span> <span class="k">when</span> <span class="nx">dish</span> <span class="o">isnt</span> <span class="s">'roast'</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">courses</span><span class="p">,</span> <span class="nx">dish</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">_i</span><span class="p">,</span> <span class="nx">_len</span><span class="p">;</span>
+
+<span class="nx">courses</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'greens'</span><span class="p">,</span> <span class="s1">'caviar'</span><span class="p">,</span> <span class="s1">'truffles'</span><span class="p">,</span> <span class="s1">'roast'</span><span class="p">,</span> <span class="s1">'cake'</span><span class="p">];</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">_i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">_len</span> <span class="o">=</span> <span class="nx">courses</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">_i</span> <span class="o">&lt;</span> <span class="nx">_len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="o">++</span><span class="nx">_i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">dish</span> <span class="o">=</span> <span class="nx">courses</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">dish</span> <span class="o">!==</span> <span class="s1">'roast'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">menu</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">dish</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">num = </span><span class="mi">5</span>
+<span class="nv">lyc = </span><span class="k">while</span> <span class="o">--</span><span class="nx">num</span>
+   <span class="s">'La'</span>
+
+<span class="nv">num = </span><span class="mi">5</span>
+<span class="nv">lyc = </span><span class="k">until</span> <span class="o">--</span><span class="nx">num</span> <span class="o">is</span> <span class="mi">0</span>
+   <span class="s">'La'</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">lyc</span><span class="p">,</span> <span class="nx">num</span><span class="p">;</span>
+
+<span class="nx">num</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+<span class="nx">lyc</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">_results</span><span class="p">;</span>
+  <span class="nx">_results</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">_results</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">'La'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">_results</span><span class="p">;</span>
+<span class="p">})();</span>
+</pre></div>
+
+<h3>
+<a name="%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E7%BB%A7%E6%89%BF" class="anchor" href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="octicon octicon-link"></span></a>类的定义和继承</h3>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript">Introduction to Object-Oriented JavaScript</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html">Javascript定义类（class）的三种方法</a></li>
+</ul><div class="highlight highlight-coffeescript"><pre><span class="k">class</span> <span class="nx">Animal</span>
+  <span class="nv">constructor: </span><span class="nf">(name) -&gt;</span>
+    <span class="vi">@name = </span><span class="nx">name</span>
+
+  <span class="nv">move: </span><span class="nf">(meters) -&gt;</span>
+    <span class="nx">alert</span> <span class="nx">@name</span> <span class="o">+</span> <span class="s">" moved </span><span class="si">#{</span><span class="nx">meters</span><span class="si">}</span><span class="s">m."</span>
+
+<span class="k">class</span> <span class="nx">Snake</span> <span class="k">extends</span> <span class="nx">Animal</span>
+  <span class="nv">move: </span><span class="nf">-&gt;</span>
+    <span class="nx">alert</span> <span class="s">"Slithering..."</span>
+    <span class="k">super</span> <span class="mi">5</span>
+
+<span class="k">class</span> <span class="nx">Horse</span> <span class="k">extends</span> <span class="nx">Animal</span>
+  <span class="nv">move: </span><span class="nf">-&gt;</span>
+    <span class="nx">alert</span> <span class="s">"Galloping..."</span>
+    <span class="k">super</span> <span class="mi">45</span>
+
+<span class="nv">sam = </span><span class="k">new</span> <span class="nx">Snake</span><span class="p">(</span><span class="s">'Sammy the Python'</span><span class="p">)</span>
+<span class="nv">tom = </span><span class="k">new</span> <span class="nx">Horse</span><span class="p">(</span><span class="s">'Tommy the Palomino'</span><span class="p">)</span>
+
+<span class="nx">sam</span><span class="p">.</span><span class="nx">move</span><span class="p">()</span>
+<span class="nx">tom</span><span class="p">.</span><span class="nx">move</span><span class="p">()</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">Animal::canFly = </span><span class="nf">-&gt;</span>
+  <span class="nx">@_hasWing</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">canFly</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_hasWing</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+<h3>
+<a name="%E6%9E%90%E6%9E%84%E8%A7%A3%E6%9E%90%E8%B5%8B%E5%80%BCdestructuring-assignment" class="anchor" href="#%E6%9E%90%E6%9E%84%E8%A7%A3%E6%9E%90%E8%B5%8B%E5%80%BCdestructuring-assignment"><span class="octicon octicon-link"></span></a>析构/解析赋值（Destructuring Assignment）</h3>
+
+<div class="highlight highlight-coffeescript"><pre><span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="p">{</span><span class="nx">join</span><span class="p">,</span> <span class="nx">resolve</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s">'path'</span><span class="p">)</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">_ref</span><span class="p">;</span>
+<span class="nx">_ref</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">_ref</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">_ref</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nv">futurists =</span>
+  <span class="nv">sculptor: </span><span class="s">"Umberto Boccioni"</span>
+  <span class="nv">painter: </span> <span class="s">"Vladimir Burliuk"</span>
+  <span class="nv">poet:</span>
+    <span class="nv">name: </span>  <span class="s">"F.T. Marinetti"</span>
+    <span class="nv">address: </span><span class="p">[</span>
+      <span class="s">"Via Roma 42R"</span>
+      <span class="s">"Bellagio, Italy 22021"</span>
+    <span class="p">]</span>
+
+<span class="p">{</span><span class="nv">poet: </span><span class="p">{</span><span class="nx">name</span><span class="p">,</span> <span class="nv">address: </span><span class="p">[</span><span class="nx">street</span><span class="p">,</span> <span class="nx">city</span><span class="p">]}}</span> <span class="o">=</span> <span class="nx">futurists</span>
+</pre></div>
+
+<h3>
+<a name="%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0" class="anchor" href="#%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0"><span class="octicon octicon-link"></span></a>闭包函数</h3>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nx">do</span> <span class="nf">-&gt;</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s">'run immediately'</span><span class="p">)</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'run immediately'</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+
+<div class="highlight highlight-coffeescript"><pre><span class="nx">do</span> <span class="p">(</span><span class="nv">root = </span><span class="k">this</span><span class="p">,</span> <span class="nv">factory = </span><span class="nf">(cfg) -&gt;</span>
+  <span class="c1"># content</span>
+<span class="p">)</span> <span class="nf">-&gt;</span>
+    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">exports</span> <span class="o">is</span> <span class="s">'object'</span>
+        <span class="nv">module.exports = </span><span class="nx">factory</span><span class="p">()</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">define</span> <span class="o">is</span> <span class="s">'function'</span> <span class="o">and</span> <span class="nx">define</span><span class="p">.</span><span class="nx">amd</span>
+        <span class="nx">define</span><span class="p">([</span><span class="s">'_m_player/core/cfg'</span><span class="p">],</span> <span class="nx">factory</span><span class="p">)</span>
+    <span class="k">else</span>
+        <span class="nv">root._m.player.utils = </span><span class="nx">factory</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">_m</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">cfg</span><span class="p">)</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">factory</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">exports</span> <span class="o">===</span> <span class="s1">'object'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">factory</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">define</span> <span class="o">===</span> <span class="s1">'function'</span> <span class="o">&amp;&amp;</span> <span class="nx">define</span><span class="p">.</span><span class="nx">amd</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">define</span><span class="p">([</span><span class="s1">'_m_player/core/cfg'</span><span class="p">],</span> <span class="nx">factory</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">root</span><span class="p">.</span><span class="nx">_m</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">utils</span> <span class="o">=</span> <span class="nx">factory</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">_m</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">cfg</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})(</span><span class="k">this</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cfg</span><span class="p">)</span> <span class="p">{});</span>
+</pre></div>
+
+<h2>
+<a name="%E9%9A%8F%E5%A0%82%E4%BD%9C%E4%B8%9A" class="anchor" href="#%E9%9A%8F%E5%A0%82%E4%BD%9C%E4%B8%9A"><span class="octicon octicon-link"></span></a>随堂作业</h2>
+
+<p>创建一个jQuery插件（如$.fn.list），使其配合样式对列表实现hover效果（即对li标签模拟a标签的:hover响应）。示例如下：
+<a href="http://jsbin.com/IKiVOru/1/embed?html,css,output">JS Bin</a></p>
+
+<h2>
+<a name="%E8%AF%BE%E5%A4%96%E5%8F%82%E8%80%83" class="anchor" href="#%E8%AF%BE%E5%A4%96%E5%8F%82%E8%80%83"><span class="octicon octicon-link"></span></a>课外参考</h2>
+
+<ul>
+<li><a href="http://coffeescript.org/">CoffeeScript官网</a></li>
+<li><a href="http://read.douban.com/ebook/198648/">CoffeeScript小书</a></li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/hustKiwi">hustKiwi</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
